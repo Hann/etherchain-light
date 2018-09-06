@@ -12,7 +12,7 @@ html(lang="en")
         
     title Etherchain Light
     
-    link(href=config.bootstrapUrl, rel="stylesheet", crossorigin="anonymous")    
+    link(rel="stylesheet", href='/stylesheets/bootstrap.min.css')    
     link(rel='stylesheet', href='/stylesheets/style.css')
     
   body
@@ -53,8 +53,8 @@ html(lang="en")
             button.btn.btn-default(type='submit') Submit
     .container      
       block content
-    script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js')
-    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', integrity='sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa', crossorigin='anonymous')
+    script(src='/javascripts/jquery.js')
+    script(src='/javascripts/bootstrap.min.js')
     script.
       $(function () {
         $('[data-toggle="tooltip"]').tooltip()
