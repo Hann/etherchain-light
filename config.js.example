@@ -19,6 +19,13 @@ var config = function () {
     "0x00427feae2419c15b89d1c21af10d1b6650a4d3d": "POA-Attores"    
   }
   
+  // route/index.js
+  this.blocksPerPage = 10;
+  this.limitTransactions = -1; // if -1; print all transactions
+  
+  // index.pug & route/index.js
+  this.pagesFromMe = 5; // when pagination prints out, how many print page number from the page you are viewing.
+
 }
 
 module.exports = config;

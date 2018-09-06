@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  h3 Recent blocks
+  h3 blocks
   table.table
     thead
       tr
@@ -20,9 +20,42 @@ block content
           td #{moment.unix(block.timestamp).format()}
           td #{block.transactions.length}
           td #{block.uncles.length}
-  h3 Recent Transactions
+  if pages > 0
+    div.text-cetner(align="center")
+      ul.pagination
+        if currentPageNumber === 1
+          li.disabled
+            a First
+        else
+          li
+            a(href="/?page=1") First
+        - var maxMinusOne = pagesFromMe - 1;         
+        - var i = currentPageNumber > pagesFromMe ? currentPageNumber - maxMinusOne: 1;
+        - console.log(i);
+        if i !== 1
+          li.disabled
+            a ...
+        while i <= currentPageNumber + maxMinusOne && i <= pages
+          if i === currentPageNumber
+            li.active
+              a #{i}
+          else
+            li
+              a(href='/?page=' + i) #{i}
+          if i === currentPageNumber + maxMinusOne && i < pages
+            li.disabled
+              a ...
+          - i += 1
+        if currentPageNumber === pages
+          li.disabled
+            a Last
+        else
+          li
+            a(href='/?page=' + pages) Last           
+  h3 Transactions 
+    small ocurred at this time
   if txs.length === 0
-    p No transactions during the last 10 blocks
+    p No transactions
   else
     table.table
       thead
