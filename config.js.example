@@ -24,7 +24,7 @@ var config = function () {
   this.limitTransactions = -1; // if -1; print all transactions
   
   // index.pug & route/index.js
-  this.pagesFromMe = 5; // when pagination prints out, how many print page number from the page you are viewing.
+  this.paginationWidth = 10; // pagination 출력할 때, 얼마나 많이 보여줄 것인지.
 
 }
 

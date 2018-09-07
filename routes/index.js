@@ -56,7 +56,9 @@ router.get('/', function(req, res, next) {
     });
     res.render('index', {
       blocks: blocks, txs: txs, currentPageNumber: currentPageNumber, 
-      pages: Math.ceil(latestNumber / config.blocksPerPage), pagesFromMe: config.pagesFromMe});
+      pages: Math.ceil(latestNumber / blocksPerPage), paginationWidth: config.paginationWidth,
+      pagesList: config.blocksPerPageList, blocksPerPage: blocksPerPage
+    });
   });
   
 });

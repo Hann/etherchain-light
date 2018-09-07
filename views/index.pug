@@ -27,37 +27,43 @@ block content
           td #{block.transactions.length}
           td #{block.uncles.length}
   if pages > 0
-    div.text-cetner(align="center")
+    div.text-cetner(align="center")      
       ul.pagination
         if currentPageNumber === 1
           li.disabled
-            a First
-        else
+            a First          
+        else          
           li
-            a(href="/?page=1") First
-        - var maxMinusOne = pagesFromMe - 1;         
-        - var i = currentPageNumber > pagesFromMe ? currentPageNumber - maxMinusOne: 1;
-        - console.log(i);
-        if i !== 1
-          li.disabled
-            a ...
-        while i <= currentPageNumber + maxMinusOne && i <= pages
-          if i === currentPageNumber
+            a(href="/?page=1&blocks=" + blocksPerPage) First
+        // 나머지가 0인 순간에 다음 페이지로 넘어가서 강제로 -1해서 계산
+        - var adjustPageNumber = currentPageNumber - 1;
+        - var quo = Math.floor(adjustPageNumber/paginationWidth);
+        - var num = quo * paginationWidth + 1; 
+
+        if Math.floor(adjustPageNumber/paginationWidth)
+          li 
+            a(href="/?page="+ ((quo - 1) * paginationWidth + 1) + "&blocks=" + blocksPerPage) <         
+        // 페이지의 시작 ex) page# 11 ~ 20 , 너비 10, 현재 11 => (13 quo 10 * 10 + 1) quo 는 몫을 구하는 연산자
+        - var last = (quo + 1) * paginationWidth;
+        while num <= last
+          // 페이지의 끝
+          if currentPageNumber === num
             li.active
-              a #{i}
+              a #{num}
           else
             li
-              a(href='/?page=' + i) #{i}
-          if i === currentPageNumber + maxMinusOne && i < pages
-            li.disabled
-              a ...
-          - i += 1
+              a(href='/?page=' + num + "&blocks=" + blocksPerPage) #{num}
+          - num++;
+        if Math.floor(adjustPageNumber/paginationWidth) !== Math.floor((pages-1)/paginationWidth)
+          li 
+            a(href="/?page=" + (last + 1 )+ "&blocks=" + blocksPerPage) >         
+
         if currentPageNumber === pages
           li.disabled
-            a Last
+            a Last (#{pages})
         else
           li
-            a(href='/?page=' + pages) Last           
+            a(href='/?page=' + pages + "&blocks=" + blocksPerPage) Last (#{pages})          
   h3 Transactions 
     small ocurred at this time
   if txs.length === 0
@@ -82,8 +88,11 @@ block content
                 a(href="/account/" + tx.to) #{nameformatter.format(tx.to)}
               else
                 | New Contract
-            td #{ethformatter(tx.value)}            td #{ethformatter(tx.value)}
+            td #{ethformatter(tx.value)}
 
 block extra_css
   link(rel='stylesheet', href='/stylesheets/index.css')
   link(rel='stylesheet', href='/stylesheets/fontawesome.css')
+
+block extra_js
+  script(src='/javascripts/index.js')
