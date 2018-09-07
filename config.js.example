@@ -20,7 +20,7 @@ var config = function () {
   }
   
   // route/index.js
-  this.blocksPerPage = 10;
+  this.blocksPerPageList = [10, 25, 50, 100]
   this.limitTransactions = -1; // if -1; print all transactions
   
   // index.pug & route/index.js
