@@ -10,7 +10,7 @@ $(function(){
         return query;
     }
             
-    $("#one-page-select").click(function(e) {
+    $("#one-page-select").change(function(e) {
         var selected = $(this).val();
         var params = parseQuery(window.location.search);
         params['blocks'] = selected;
